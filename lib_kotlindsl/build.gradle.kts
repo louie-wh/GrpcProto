@@ -49,7 +49,7 @@ protobuf {
         }
     }
     generateProtoTasks {
-        ofSourceSet("main").forEach {
+        all().forEach {
             it.plugins {
                 // Apply the "grpc" plugin whose spec is defined above, without
                 // options. Note the braces cannot be omitted, otherwise the
