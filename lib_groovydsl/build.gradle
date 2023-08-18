@@ -28,6 +28,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+//    sourceSets {
+//        main {
+//            proto {
+//                srcDir '../proto'
+//            }
+//        }
+//    }
 }
 
 protobuf {
@@ -57,6 +65,11 @@ dependencies {
     implementation 'io.grpc:grpc-protobuf-lite:1.57.2'
     implementation 'io.grpc:grpc-stub:1.57.2'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+
+    // Extra proto source files besides the ones residing under
+    // "src/main".
+    protobuf(files("../protos.tar.gz"))
+    protobuf(files("../proto/protos.jar"))
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

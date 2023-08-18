@@ -1,4 +1,5 @@
 import com.google.protobuf.gradle.id
+import com.google.protobuf.gradle.proto
 
 plugins {
     id("com.android.library")
@@ -32,6 +33,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        getByName("main") {
+            proto {
+                srcDir("../proto/")
+            }
+        }
     }
 }
 
@@ -67,6 +76,9 @@ dependencies {
     implementation("io.grpc:grpc-protobuf-lite:1.57.2")
     implementation("io.grpc:grpc-stub:1.57.2")
     compileOnly("org.apache.tomcat:annotations-api:6.0.53")
+
+    protobuf(files("../protos.tar.gz"))
+    protobuf(files("../proto/protos.jar"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
