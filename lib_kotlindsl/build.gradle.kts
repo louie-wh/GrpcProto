@@ -38,14 +38,14 @@ android {
 protobuf {
     protoc {
         // The artifact spec for the Protobuf Compiler
-        artifact = "com.google.protobuf:protoc:3.6.1"
+        artifact = "com.google.protobuf:protoc:3.22.3"
     }
     plugins {
         // Optional: an artifact spec for a protoc plugin, with "grpc" as
         // the identifier, which can be referred to in the "plugins"
         // container of the "generateProtoTasks" closure.
         id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.15.1"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.57.2"
         }
     }
     generateProtoTasks {
@@ -55,13 +55,18 @@ protobuf {
                 // options. Note the braces cannot be omitted, otherwise the
                 // plugin will not be added. This is because of the implicit way
                 // NamedDomainObjectContainer binds the methods.
-                id("grpc") { }
+                id("grpc") { option("lite") }
+                id("java") { option("lite") }
             }
         }
     }
 }
 
 dependencies {
+
+    implementation("io.grpc:grpc-protobuf-lite:1.57.2")
+    implementation("io.grpc:grpc-stub:1.57.2")
+    compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
